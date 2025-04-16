@@ -14,6 +14,21 @@ import com.example.fp.R;
 
 import java.util.List;
 
+
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.fp.R;
+
+import java.util.List;
+
 public class FacultyAdapter extends RecyclerView.Adapter<FacultyAdapter.ViewHolder> {
     private List<Faculty> facultyList;
     private Context context;
@@ -33,27 +48,33 @@ public class FacultyAdapter extends RecyclerView.Adapter<FacultyAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Faculty faculty = facultyList.get(position);
+        if (faculty == null) return;
 
-        holder.nameTextView.setText(faculty.getName());
-        holder.ecodeTextView.setText("E-Code: " + faculty.getEcode());
-        holder.emailTextView.setText("Email: " + faculty.getEmail());
-        holder.contactTextView.setText("Contact: " + faculty.getContact());
-        holder.coordinatorTextView.setText("Coordinator: " + faculty.getCoordinator());
-        holder.yearTextView.setText("Year: " + faculty.getYear());
-        holder.responsibilityTextView.setText("Responsibility: " + faculty.getResponsibility());
-        holder.venueTextView.setText("Seating Venue: " + faculty.getSeatingVenue());
-        holder.blockTextView.setText("Block: " + faculty.getBlock());
+        holder.nameTextView.setText("Name: " + safeText(faculty.getName()));
+        holder.ecodeTextView.setText("E-Code: " + safeText(faculty.getEcode()));
+        holder.emailTextView.setText("Email: " + safeText(faculty.getEmail()));
+        holder.contactTextView.setText("Contact: " + safeText(faculty.getContact()));
+        holder.coordinatorTextView.setText("Coordinator: " + safeText(faculty.getCoordinator()));
+        holder.yearTextView.setText("Year: " + safeText(faculty.getYear()));
+        holder.responsibilityTextView.setText("Responsibility: " + safeText(faculty.getResponsibility()));
+        holder.venueTextView.setText("Seating Venue: " + safeText(faculty.getSeatingVenue()));
+        holder.blockTextView.setText("Block: " + safeText(faculty.getBlock()));
     }
 
     @Override
     public int getItemCount() {
-        return facultyList.size();
+        return facultyList != null ? facultyList.size() : 0;
     }
 
     public void updateData(List<Faculty> newList) {
+        if (newList == null) return;
         facultyList.clear();
         facultyList.addAll(newList);
         notifyDataSetChanged();
+    }
+
+    private String safeText(String input) {
+        return input != null && !input.trim().isEmpty() ? input : "N/A";
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

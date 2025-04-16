@@ -2,15 +2,37 @@ package com.example;
 
 
 
+
+
+import com.google.gson.annotations.SerializedName;
+
 public class Faculty {
+
+    @SerializedName("name")
     private String name;
+
+    @SerializedName("eCode") // Important: matches JSON "eCode"
     private String ecode;
+
+    @SerializedName("email")
     private String email;
+
+    @SerializedName("contact")
     private String contact;
+
+    @SerializedName("coordinator")
     private String coordinator;
+
+    @SerializedName("year")
     private String year;
+
+    @SerializedName("responsibility")
     private String responsibility;
+
+    @SerializedName("seatingVenue")
     private String seatingVenue;
+
+    @SerializedName("block")
     private String block;
 
     // Default constructor for Retrofit
