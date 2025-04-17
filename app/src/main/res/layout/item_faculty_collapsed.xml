@@ -28,6 +28,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <!-- This is the icon that was causing the error - Make sure the drawable exists -->
             <ImageView
                 android:id="@+id/expandIcon"
                 android:layout_width="24dp"
